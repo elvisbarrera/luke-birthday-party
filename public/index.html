@@ -10,13 +10,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Luke's Birthday Battle">
 <meta property="og:url" content="https://luke-birthday-party.netlify.app/">
-<meta property="og:image" content="https://luke-birthday-party.netlify.app/og-luke2.jpg">
+<meta property="og:image" content="https://luke-birthday-party.netlify.app/og-luke3.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Luke's 6th Birthday Battle invitation">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://luke-birthday-party.netlify.app/og-luke2.jpg">
+<meta name="twitter:image" content="https://luke-birthday-party.netlify.app/og-luke3.jpg">
 <meta name="theme-color" content="#070b1f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,7 +174,7 @@ main{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:0 18px ca
 /* ───────── HERO ───────── */
 .hero{text-align:center;padding:calc(34px + env(safe-area-inset-top)) 0 14px}
 .eyebrow{font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);font-weight:700}
-.top-wrap{position:relative;width:min(70vw,290px);aspect-ratio:1;margin:22px auto 8px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+.top-wrap{position:relative;width:min(42vw,168px);aspect-ratio:1;margin:30px auto 38px;cursor:pointer;-webkit-tap-highlight-color:transparent;
   touch-action:manipulation;user-select:none}
 .top-wrap::before,.top-wrap::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
 .top-wrap::before{inset:-16%;border:2px dashed #29d8ff88;animation:spinR 14s linear infinite;box-shadow:0 0 30px #29d8ff33}
@@ -307,9 +307,8 @@ footer .fine{margin-top:6px;font-size:14px;opacity:.85}
 .ls-beam{position:absolute;top:-6%;width:34%;height:110%;filter:blur(22px);opacity:.5;pointer-events:none;transform-origin:50% 0}
 .ls-beam.b1{left:6%;background:linear-gradient(180deg,#ff2e88,transparent 80%);animation:lsSwing 6s ease-in-out infinite alternate}
 .ls-beam.b2{left:58%;background:linear-gradient(180deg,#29d8ff,transparent 80%);animation:lsSwing 7s ease-in-out -2s infinite alternate-reverse}
-.ls-luke{position:absolute;right:0;bottom:0;width:80%;height:auto;z-index:2;
-  filter:drop-shadow(0 0 2px #fff8) drop-shadow(0 0 22px #7a4dffcc);
-  -webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
+.ls-lukew{position:absolute;right:0;bottom:0;width:80%;z-index:2;filter:drop-shadow(0 0 2px #fff8) drop-shadow(0 0 22px #7a4dffcc)}
+.ls-luke{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
 .ls-top{position:absolute;left:19%;top:-5%;width:34%;aspect-ratio:1;z-index:3;filter:drop-shadow(0 0 18px #ffd23fcc);animation:lsHover 2.4s ease-in-out infinite}
 .ls-top svg{position:absolute;inset:0;width:100%;height:100%;animation:lsSpin .55s linear infinite}
 .ls-top i{position:absolute;inset:-14%;border-radius:50%;border:3px solid transparent;border-top-color:#29d8ffcc;border-bottom-color:#ff2e88cc;filter:blur(1.5px);animation:lsSpin .9s linear infinite reverse}
@@ -323,6 +322,25 @@ footer .fine{margin-top:6px;font-size:14px;opacity:.85}
 @keyframes lsHover{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @media (prefers-reduced-motion:reduce){.ls-ring.r2,.ls-beam,.ls-top,.ls-top svg,.ls-top i{animation:none}}
 .me-logo{display:block;height:46px;width:auto;margin:2px 0 6px;filter:drop-shadow(0 0 10px #ffffff33)}
+
+.top-wrap .hint{white-space:nowrap}
+@media (max-width:380px){
+  .top-wrap .hint{font-size:11px;letter-spacing:.14em}
+  .btn{font-size:20px;padding:18px 10px;letter-spacing:.03em}
+  .btn small{font-size:12px;letter-spacing:.04em;white-space:nowrap}
+  .btn.yes,.btn.no{white-space:nowrap}
+  .card .map{white-space:nowrap;font-size:13px;letter-spacing:.04em;padding-left:12px;padding-right:12px}
+}
+html,body{overflow-x:clip}
+.ls-beam{display:none}
+.luke-stage::before{content:"";position:absolute;left:50%;top:52%;width:120%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(122,77,255,.38),rgba(255,46,136,.16) 45%,transparent 68%)}
+main{overflow-x:clip}
+/* v3: no arena circle - dark stage with drifting colored lights only */
+.arena-wrap{left:0;top:0;width:100%;height:100%;aspect-ratio:auto;transform:none;perspective:none}
+.arena3d{transform:none!important;opacity:.6}
+.arena-base,.arena-leds,.sweep{display:none!important}
+.haze{background:radial-gradient(ellipse at 50% 30%,transparent 10%,rgba(5,8,22,.7) 100%),linear-gradient(180deg,rgba(5,8,22,.55),rgba(5,8,22,.35) 45%,rgba(5,8,22,.7))}
+.beams{opacity:.55}
 </style>
 </head>
 <body class="lock">
@@ -443,9 +461,8 @@ footer .fine{margin-top:6px;font-size:14px;opacity:.85}
 
   <section class="luke-stage reveal" aria-label="Luke, the birthday blader">
     <div class="ls-ring r1"></div><div class="ls-ring r2"></div><div class="ls-ring r3"></div>
-    <div class="ls-beam b1"></div><div class="ls-beam b2"></div>
-    <div class="ls-top" aria-hidden="true"><i></i><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
-    <img class="ls-luke" src="luke.webp" width="528" height="621" alt="Luke launching his battle top" loading="lazy" decoding="async">
+        <div class="ls-top" aria-hidden="true"><i></i><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
+    <div class="ls-lukew"><img class="ls-luke" src="luke.webp" width="528" height="621" alt="Luke launching his battle top" loading="lazy" decoding="async"></div>
     <div class="ls-plate"><b>Luke</b><span>Birthday Blader · Age 6</span></div>
   </section>
 
