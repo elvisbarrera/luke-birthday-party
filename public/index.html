@@ -60,14 +60,16 @@ main{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:0 18px ca
   text-shadow:0 0 30px var(--orange),0 6px 0 #b34a00;opacity:0}
 .count.pop{animation:countPop .55s cubic-bezier(.2,1.5,.4,1) forwards}
 @keyframes countPop{0%{opacity:0;transform:scale(2.4)}30%{opacity:1;transform:scale(1)}85%{opacity:1;transform:scale(.96)}100%{opacity:0;transform:scale(.4)}}
-.rip{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--display);
-  font-size:clamp(46px,15vw,120px);line-height:.95;color:#fff;opacity:0;
-  text-shadow:0 0 18px var(--cyan),0 0 40px var(--violet),0 5px 0 #1b2a8a}
-.rip span{display:block;background:linear-gradient(180deg,#fff 20%,var(--gold) 60%,var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 0 14px #ff7a1a)}
+.rip{position:absolute;inset:0;z-index:6;display:grid;place-items:center;text-align:center;font-family:var(--display);
+  font-size:clamp(52px,19vw,132px);line-height:.95;opacity:0;pointer-events:none}
+.rip span{grid-area:1/1;display:block}
+/* glow lives on its own layer BEHIND the crisp letters */
+.rip .g{color:var(--cyan);text-shadow:0 0 22px var(--violet),0 0 54px var(--pink);filter:blur(9px);opacity:1;z-index:0}
+.rip .t{position:relative;z-index:1;background:linear-gradient(180deg,#fff 20%,var(--gold) 60%,var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 5px 0 #1b2a8a)}
 #intro.go .rip{animation:slam .55s cubic-bezier(.2,1.6,.3,1) forwards}
-@keyframes slam{0%{opacity:0;transform:scale(.3) rotate(-8deg)}50%{opacity:1;transform:scale(1.15) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+@keyframes slam{0%{opacity:0;transform:scale(2.2) rotate(-8deg)}45%{opacity:1;transform:scale(.94) rotate(1deg)}70%{transform:scale(1.04) rotate(0)}100%{opacity:1;transform:none}}
+.flash{position:absolute;inset:0;z-index:2;background:#fff;opacity:0;pointer-events:none}
 #intro.go .flash{animation:flash .7s ease-out}
 @keyframes flash{0%{opacity:.95}100%{opacity:0}}
 .shock{position:absolute;left:50%;top:50%;width:40vmin;height:40vmin;margin:-20vmin 0 0 -20vmin;border-radius:50%;border:6px solid var(--cyan);opacity:0;box-shadow:0 0 40px var(--cyan)}
@@ -97,7 +99,7 @@ main{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:0 18px ca
   82%{transform:translate(6vw,-4vh) scale(1.2);filter:blur(6px)}
   100%{opacity:0;transform:translate(0,0) scale(1.25);filter:blur(4px)}
 }
-#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+#fx{position:absolute;z-index:1;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
 #intro.go{animation:shake .6s linear}
 @keyframes shake{
   0%,100%{transform:translate(0) scale(1)}
@@ -430,7 +432,7 @@ main{overflow-x:clip}
   <div class="fly ghost" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
   <div class="fly" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
   <div class="shock" aria-hidden="true"></div><div class="shock s2" aria-hidden="true"></div>
-  <div class="rip" aria-hidden="true"><span>LET IT<br>RIP!</span></div>
+  <div class="rip" aria-hidden="true"><span class="g">LET IT<br>RIP!</span><span class="t">LET IT<br>RIP!</span></div>
   <div class="flash" aria-hidden="true"></div>
   <button id="skip" type="button">Skip</button>
   <div class="start" id="start">
