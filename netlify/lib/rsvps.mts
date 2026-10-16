@@ -21,9 +21,12 @@ export async function getAll(): Promise<Rsvp[]> {
 
 export function totals(all: Rsvp[]) {
   const yes = all.filter((r) => r.attending);
+  const kids = yes.reduce((n, r) => n + r.kids, 0);
+  const adults = yes.reduce((n, r) => n + r.adults, 0);
   return {
-    kids: yes.reduce((n, r) => n + r.kids, 0),
-    adults: yes.reduce((n, r) => n + r.adults, 0),
+    kids,
+    adults,
+    people: kids + adults,
     yes: yes.length,
     no: all.length - yes.length,
   };
