@@ -404,6 +404,41 @@ main{overflow-x:clip}
 .arena-base,.arena-leds,.sweep{display:none!important}
 .haze{background:radial-gradient(ellipse at 50% 30%,transparent 10%,rgba(5,8,22,.7) 100%),linear-gradient(180deg,rgba(5,8,22,.55),rgba(5,8,22,.35) 45%,rgba(5,8,22,.7))}
 .beams{opacity:.55}
+
+/* party intro: no countdown, straight to LET'S PARTY */
+#intro{background:radial-gradient(circle at 50% 55%,#3b1676 0%,#14083a 55%,#070418 100%)}
+#intro::before{content:"";position:absolute;left:50%;top:50%;width:230vmax;height:230vmax;margin:-115vmax 0 0 -115vmax;pointer-events:none;opacity:0;transition:opacity .4s;
+  background:repeating-conic-gradient(from 0deg,rgba(255,60,150,.22) 0 6deg,transparent 6deg 18deg,rgba(60,220,255,.18) 18deg 24deg,transparent 24deg 36deg);animation:raySpin 14s linear infinite}
+#intro.go::before{opacity:1}
+@keyframes raySpin{to{transform:rotate(360deg)}}
+.arena,.count,.fly{display:none!important}
+.rip .g{color:#ff5bb0;text-shadow:0 0 22px #ffd23f,0 0 54px #ff2e88}
+.rip .t{background:linear-gradient(180deg,#fff 15%,#ffe36b 50%,#ff5bb0);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 5px 0 #6a1fb0)}
+.pe{position:absolute;font-style:normal;font-size:clamp(34px,11vw,72px);opacity:0;filter:drop-shadow(0 0 14px #fff8)}
+#intro.go .pe{animation:peIn .6s cubic-bezier(.2,1.8,.4,1) forwards,peBob 1.2s ease-in-out .7s infinite}
+.pe.e1{left:8%;top:22%}.pe.e2{right:8%;top:24%}.pe.e3{left:12%;bottom:22%}.pe.e4{right:10%;bottom:20%}
+@keyframes peIn{from{opacity:0;transform:scale(0) rotate(-40deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes peBob{50%{transform:translateY(-8px) rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){#intro::before{animation:none}}
+
+/* 3D cyberpunk start (arcade3d.js); CSS cabinet stays as fallback */
+.hud,.a3d{display:none}
+.start.s3d{background:#05030c}
+.start.s3d .cabwrap{display:none}
+.start.s3d .a3d{display:block;position:absolute;inset:0;width:100%;height:100%;animation:a3in .8s ease both}
+@keyframes a3in{from{opacity:0}to{opacity:1}}
+.start.s3d .hud{display:flex;position:absolute;inset:0;z-index:4;flex-direction:column;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));pointer-events:none;font-family:'Rajdhani','Russo One',sans-serif}
+.hud-top{display:flex;justify-content:space-between;font:600 12px/1 'Rajdhani',sans-serif;letter-spacing:.18em;color:#00f0ff;text-shadow:0 0 8px #00f0ff}
+.hud-live{color:#ff003c;text-shadow:0 0 8px #ff003c;animation:hl 1.2s steps(2) infinite}
+@keyframes hl{50%{opacity:.25}}
+.hud-bot{display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:auto}
+.hbtn{position:relative;width:min(78vw,320px);height:58px;border:0;cursor:pointer;background:#fcee0a;color:#050505;font:400 26px/1 'Russo One',sans-serif;letter-spacing:.22em;display:flex;align-items:center;justify-content:center;gap:12px;
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));filter:drop-shadow(0 0 14px rgba(252,238,10,.55));animation:hp 1.6s ease-in-out infinite}
+.hbtn small{font:700 11px/1 'Rajdhani',sans-serif;letter-spacing:.12em;opacity:.7}
+.hbtn:active{transform:scale(.97);background:#fff}
+@keyframes hp{50%{filter:drop-shadow(0 0 26px rgba(252,238,10,.95))}}
+.hno{background:none;border:0;color:#00f0ff;font:600 13px/1 'Rajdhani',sans-serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px 12px;text-shadow:0 0 8px #00f0ff88}
+@media (max-width:380px){.hbtn{font-size:22px;height:52px}.start.s3d .hud{padding-bottom:calc(70px + env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body class="lock">
@@ -485,18 +520,19 @@ main{overflow-x:clip}
 
 <!-- ───────── INTRO ───────── -->
 <div id="intro">
-  <div class="arena" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <canvas id="fx" aria-hidden="true"></canvas>
-  <div class="count" id="count" aria-hidden="true">3</div>
-  <div class="fly ghost g3" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
-  <div class="fly ghost g2" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
-  <div class="fly ghost" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
-  <div class="fly" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#battletop"/></svg></div>
   <div class="shock" aria-hidden="true"></div><div class="shock s2" aria-hidden="true"></div>
-  <div class="rip" aria-hidden="true"><span class="g">LET'S<br>PARTY!</span><span class="t">LET'S<br>PARTY!</span></div>
+  <div class="rip" aria-hidden="true"><span class="g">LET'S<br>PARTY!</span><span class="t">LET'S<br>PARTY!</span><i class="pe e1">🎉</i><i class="pe e2" style="animation-delay:.08s,.7s">🎈</i><i class="pe e3" style="animation-delay:.16s,.8s">🎂</i><i class="pe e4" style="animation-delay:.24s,.9s">🥳</i></div>
   <div class="flash" aria-hidden="true"></div>
   <button id="skip" type="button">Skip</button>
   <div class="start" id="start">
+    <div class="hud" id="hud">
+      <div class="hud-top"><span>SYS://LUKE.6TH.BDAY</span><span class="hud-live">● LIVE</span></div>
+      <div class="hud-bot">
+        <button class="hbtn" id="hudBtn" type="button" aria-label="Start, with sound"><span>START</span><small>🔊 SOUND ON</small></button>
+        <button class="hno" id="hudNo" type="button">start without sound</button>
+      </div>
+    </div>
     <div class="cabwrap">
     <div class="cab">
       <div class="marq"><span>LUKE'S ARCADE</span></div>
@@ -694,6 +730,8 @@ main{overflow-x:clip}
       tone(90,1,{type:'sawtooth',to:1500,vol:.2});
       tone(70,.5,{type:'square',to:28,vol:.32,at:.05});
     },
+    party:function(){noise(.12,{ftype:'highpass',f0:3000,vol:.4});tone(110,.15,{type:'sine',to:50,vol:.4});arp([523,659,784,1047],.07,{vol:.17,type:'square'});tone(1568,.5,{type:'triangle',vol:.14,at:.3})},
+    pop:function(){noise(.1,{ftype:'highpass',f0:2500,vol:.35});tone(300,.08,{type:'sine',to:80,vol:.3})},
     boom:function(){noise(.55,{f0:3200,f1:110,vol:.38});tone(130,.45,{type:'sawtooth',to:38,vol:.3})},
     power:function(){arp([392,523,659,784,1047,1319],.06,{vol:.15})},
     spin:function(){tone(180,.65,{type:'sawtooth',to:1900,vol:.14});tone(360,.65,{type:'square',to:2500,vol:.06});noise(.55,{ftype:'bandpass',f0:500,f1:3600,vol:.2})},
@@ -787,20 +825,22 @@ main{overflow-x:clip}
     });
     fxc.shadowBlur=0;
   }
+  var conf=[], CC=['#ff2e88','#ffd23f','#29d8ff','#7a4dff','#46e08a','#ff7a1a','#ffffff'];
+  function blast(x,y,n,ang,spread,power){
+    for(var i=0;i<n;i++){var a=ang+(Math.random()-.5)*spread, v=power*(.35+Math.random()*.9);
+      conf.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,w:6+Math.random()*9,h:3+Math.random()*6,rot:Math.random()*6.28,vr:(Math.random()-.5)*.4,c:CC[(Math.random()*CC.length)|0],life:1,decay:.0035+Math.random()*.004,fl:Math.random()*6})}
+  }
   function fxLoop(t){
-    if(!fxOn){fxc.clearRect(0,0,W,H);return}
+    if(!fxOn&&!conf.length){fxc.clearRect(0,0,W,H);return}
     requestAnimationFrame(fxLoop);
     fxc.clearRect(0,0,W,H);
-    var cx0=W/2, cy0=H/2, diag=Math.hypot(W,H)/2;
-    streaks.forEach(function(s){
-      s.r+=s.s*fxPower; if(s.r>1.05){var n=newStreak(0);s.a=n.a;s.r=0;s.s=n.s;s.w=n.w;s.c=n.c}
-      var r0=s.r*diag, len=(.03+.16*s.r)*diag*(.5+fxPower*.35), ca=Math.cos(s.a), sa=Math.sin(s.a);
-      fxc.globalAlpha=Math.min(1,s.r*2.2)*.8;fxc.strokeStyle=s.c;fxc.lineWidth=s.w*(.5+s.r*1.2);fxc.lineCap='round';
-      fxc.beginPath();fxc.moveTo(cx0+ca*r0,cy0+sa*r0);fxc.lineTo(cx0+ca*(r0+len),cy0+sa*(r0+len));fxc.stroke();
-    });
+    for(var i=conf.length-1;i>=0;i--){
+      var p=conf[i];p.vx*=.985;p.vy=p.vy*.985+.24;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.fl+=.18;p.life-=p.decay;
+      if(p.life<=0||p.y>H+30){conf.splice(i,1);continue}
+      fxc.save();fxc.translate(p.x,p.y);fxc.rotate(p.rot);fxc.scale(1,Math.cos(p.fl));
+      fxc.globalAlpha=Math.min(1,p.life*2);fxc.fillStyle=p.c;fxc.fillRect(-p.w/2,-p.h/2,p.w,p.h);fxc.restore();
+    }
     fxc.globalAlpha=1;
-    if(t>fxNext){spawnBolt();fxNext=t+(fxPower>3?90:240)+Math.random()*(fxPower>3?150:450)}
-    for(var i=fxBolts.length-1;i>=0;i--){var b=fxBolts[i];drawBolt(b);b.life-=b.decay;if(b.life<=0)fxBolts.splice(i,1)}
   }
   function fxStart(){fxOn=true;fxPower=1.2;fxBolts=[];requestAnimationFrame(fxLoop)}
   function fxStop(){fxOn=false}
@@ -830,16 +870,13 @@ main{overflow-x:clip}
   var startEl=$('#start');
   function runIntro(){
     fxStart();
-    showCount(3);burst(W/2,H/2,20,6);
-    later(function(){showCount(2);fxPower=2;burst(W/2,H/2,30,7);spawnBolt()},600);
-    later(function(){showCount(1);fxPower=3;burst(W/2,H/2,40,8);spawnBolt();spawnBolt()},1200);
-    later(function(){
-      intro.classList.add('go');fxPower=5;burst(W/2,H/2,100,11);sfx.rip();sfx.applause(2.6);
-      for(var i=0;i<7;i++) setTimeout(spawnBolt,i*90);
-    },1800);
-    later(function(){fxPower=3;burst(W/2,H/2,60,7);sfx.boom()},2350);
-    later(function(){riffPlayed=true;sfx.riff();burst(W/2,H*.4,70,10)},2750);
-    later(end,3300);
+    intro.classList.add('go');
+    sfx.party();sfx.applause(2.4);
+    blast(0,H,90,-1.1,.6,20);blast(W,H,90,-2.04,.6,20);burst(W/2,H/2,60,9);
+    later(function(){blast(W*.2,H*.75,50,-1.57,.9,16);blast(W*.8,H*.75,50,-1.57,.9,16);sfx.pop()},450);
+    later(function(){riffPlayed=true;sfx.riff();blast(W/2,H*.95,80,-1.57,1.2,22);burst(W/2,H*.4,70,10)},800);
+    later(function(){blast(0,H*.5,60,-.5,.7,16);blast(W,H*.5,60,-2.64,.7,16);sfx.pop()},1500);
+    later(end,2800);
   }
   function begin(withSound){
     if(withSound){setMuted(false);audioInit();sfx.coin()}else{setMuted(true)}
@@ -965,5 +1002,6 @@ main{overflow-x:clip}
   })();
 })();
 </script>
+<script src="arcade3d.js" defer></script>
 </body>
 </html>
