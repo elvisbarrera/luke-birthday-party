@@ -423,21 +423,21 @@ main{overflow-x:clip}
 
 /* 3D cyberpunk start (arcade3d.js); CSS cabinet stays as fallback */
 .hud,.a3d{display:none}
-.start.s3d{background:#05030c}
+.start.s3d{background:#2b1380}
 .start.s3d .cabwrap{display:none}
 .start.s3d .a3d{display:block;position:absolute;inset:0;width:100%;height:100%;animation:a3in .8s ease both}
 @keyframes a3in{from{opacity:0}to{opacity:1}}
 .start.s3d .hud{display:flex;position:absolute;inset:0;z-index:4;flex-direction:column;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));pointer-events:none;font-family:'Rajdhani','Russo One',sans-serif}
-.hud-top{display:flex;justify-content:space-between;font:600 12px/1 'Rajdhani',sans-serif;letter-spacing:.18em;color:#00f0ff;text-shadow:0 0 8px #00f0ff}
+.hud-top{display:flex;justify-content:center;font:400 15px/1 'Russo One',sans-serif;letter-spacing:.08em;color:#fff;text-shadow:0 2px 0 #1d1470,0 0 10px #1d147088}
 .hud-live{color:#ff003c;text-shadow:0 0 8px #ff003c;animation:hl 1.2s steps(2) infinite}
 @keyframes hl{50%{opacity:.25}}
 .hud-bot{display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:auto}
-.hbtn{position:relative;width:min(78vw,320px);height:58px;border:0;cursor:pointer;background:#fcee0a;color:#050505;font:400 26px/1 'Russo One',sans-serif;letter-spacing:.22em;display:flex;align-items:center;justify-content:center;gap:12px;
-  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));filter:drop-shadow(0 0 14px rgba(252,238,10,.55));animation:hp 1.6s ease-in-out infinite}
-.hbtn small{font:700 11px/1 'Rajdhani',sans-serif;letter-spacing:.12em;opacity:.7}
-.hbtn:active{transform:scale(.97);background:#fff}
-@keyframes hp{50%{filter:drop-shadow(0 0 26px rgba(252,238,10,.95))}}
-.hno{background:none;border:0;color:#00f0ff;font:600 13px/1 'Rajdhani',sans-serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px 12px;text-shadow:0 0 8px #00f0ff88}
+.hbtn{position:relative;width:min(80vw,320px);height:62px;border:4px solid #fff;border-radius:34px;cursor:pointer;background:linear-gradient(180deg,#ffe14a,#ff9a1f);color:#fff;font:400 28px/1 'Russo One',sans-serif;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:12px;
+  text-shadow:0 3px 0 #b3470a,0 0 2px #b3470a;box-shadow:0 6px 0 #b3470a,0 10px 24px rgba(255,154,31,.6);animation:hp 1.4s ease-in-out infinite}
+.hbtn small{font:700 12px/1 'Rajdhani',sans-serif;letter-spacing:.08em;text-shadow:none;color:#5a2a00;background:#fff;border-radius:12px;padding:4px 8px}
+.hbtn:active{transform:translateY(4px);box-shadow:0 2px 0 #b3470a}
+@keyframes hp{50%{transform:scale(1.04)}}
+.hno{background:none;border:0;color:#fff;font:700 14px/1 'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px 12px;text-shadow:0 1px 4px #1d1470}
 @media (max-width:380px){.hbtn{font-size:22px;height:52px}.start.s3d .hud{padding-bottom:calc(70px + env(safe-area-inset-bottom))}}
 </style>
 </head>
@@ -527,7 +527,7 @@ main{overflow-x:clip}
   <button id="skip" type="button">Skip</button>
   <div class="start" id="start">
     <div class="hud" id="hud">
-      <div class="hud-top"><span>SYS://LUKE.6TH.BDAY</span><span class="hud-live">● LIVE</span></div>
+      <div class="hud-top"><span>🎈 LUKE TURNS 6! 🎈</span></div>
       <div class="hud-bot">
         <button class="hbtn" id="hudBtn" type="button" aria-label="Start, with sound"><span>START</span><small>🔊 SOUND ON</small></button>
         <button class="hno" id="hudNo" type="button">start without sound</button>
