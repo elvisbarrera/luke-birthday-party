@@ -440,32 +440,31 @@ main{overflow-x:clip}
 .hno{background:none;border:0;color:#fff;font:700 14px/1 'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px 12px;text-shadow:0 1px 4px #1d1470}
 @media (max-width:380px){.hbtn{font-size:22px;height:52px}.start.s3d .hud{padding-bottom:calc(70px + env(safe-area-inset-bottom))}}
 
-/* simple pixel-arcade start screen */
-.start{background:#14063a!important}
+/* flat arcade illustration start screen */
+.start{background:radial-gradient(ellipse at 50% 40%,#2a1170,#12082e 70%)!important}
 .start::after{display:none}
-.px{position:relative;z-index:2;width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3.4vh,28px);text-align:center;font-family:'Press Start 2P',monospace;padding:20px 12px;
-  image-rendering:pixelated}
-.px::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 2px,transparent 2px 4px),
-  linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/16px 16px}
-.px-stars{position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(circle,#fff 0 1.5px,transparent 2px) 0 0/90px 90px,radial-gradient(circle,#ffe14a 0 1.5px,transparent 2px) 30px 45px/110px 110px,radial-gradient(circle,#35d6ff 0 1.5px,transparent 2px) 60px 20px/130px 130px;animation:tw 1.6s steps(2) infinite}
-@keyframes tw{50%{opacity:.4}}
-.px-top{color:#35d6ff;font-size:clamp(10px,3vw,13px);letter-spacing:.1em}
-.px-title{display:flex;flex-direction:column;gap:12px;line-height:1}
-.px-title span{display:block;text-shadow:4px 4px 0 #1d1470,-2px -2px 0 #1d1470,2px -2px 0 #1d1470,-2px 2px 0 #1d1470}
-.px-title .a{color:#ffe14a;font-size:clamp(34px,13vw,58px)}
-.px-title .b{color:#fff;font-size:clamp(24px,9vw,40px)}
-.px-title .c{color:#ff4fa3;font-size:clamp(44px,17vw,76px)}
-.px-sub{color:#7dff6a;font-size:clamp(11px,3.6vw,16px);line-height:1.5;text-shadow:3px 3px 0 #1d1470}
-.px-btn{margin-top:6px;width:min(82vw,330px);padding:clamp(20px,4.4vh,30px) 10px;border:0;cursor:pointer;background:#ffe14a;color:#1d1470;font:inherit;font-size:clamp(30px,10vw,44px);letter-spacing:.06em;
-  box-shadow:0 0 0 5px #1d1470,0 0 0 9px #fff,0 12px 0 9px #c9302c;clip-path:none;animation:pxp 1s steps(2) infinite}
-.px-btn b{font-weight:400;text-shadow:3px 3px 0 #fff8}
-.px-btn:active{transform:translateY(8px);box-shadow:0 0 0 5px #1d1470,0 0 0 9px #fff,0 4px 0 9px #c9302c}
-@keyframes pxp{50%{transform:scale(1.05)}}
-.px-tap{color:#fff;font-size:clamp(9px,2.8vw,12px);animation:blk 1s steps(2) infinite;margin-top:10px}
+.arc{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:'Press Start 2P',monospace}
+.cabwrap2{container-type:inline-size;position:relative;width:min(94vw,420px,calc((100svh - 56px)/1.75));aspect-ratio:1/1.75;filter:drop-shadow(0 2cqw 4cqw rgba(0,0,0,.5))}
+.cabsvg{position:absolute;inset:0;width:100%;height:100%}
+.mq{position:absolute;left:7%;right:7%;top:.9%;height:16%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4cqw}
+.mq span{font-size:5.6cqw;line-height:1;white-space:nowrap;background:linear-gradient(180deg,#ffd21f,#ff4fa3);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(.6cqw .6cqw 0 #1d1470)}
+.mq i{font-style:normal;color:#ffe14a;font-size:3.4cqw;letter-spacing:1cqw;text-shadow:0 0 6px #ffe14a}
+.scr{position:absolute;left:15%;top:28.6%;width:70%;height:38.6%;overflow:hidden;border-radius:4cqw}
+.scr::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,40,.18) 0 .5cqw,transparent .5cqw 1cqw)}
+.scr-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:2.4cqw 3cqw 2.6cqw;text-align:center}
+.s-top{width:100%;display:flex;justify-content:space-between;color:#cfe6ff;font-size:2.4cqw;text-shadow:0 0 5px #9fd0ff}
+.s-title{display:flex;flex-direction:column;gap:1.6cqw;line-height:1}
+.s-title span{display:block;text-shadow:.8cqw .8cqw 0 #0e1f6e,0 0 6px currentColor}
+.s-title .a{color:#ffe14a;font-size:9.4cqw}.s-title .b{color:#fff;font-size:6.5cqw}.s-title .c{color:#ff7ac8;font-size:10.4cqw}
+.s-sub{color:#7dff6a;font-size:3.5cqw;text-shadow:.5cqw .5cqw 0 #0e1f6e,0 0 6px #7dff6a}
+.px-btn{width:92%;padding:2.6cqw 0;border:0;cursor:pointer;background:#ffe14a;color:#1d1470;font:inherit;font-size:9cqw;letter-spacing:.4cqw;box-shadow:0 0 0 .8cqw #1d1470,0 0 0 1.5cqw #fff,0 1.8cqw 0 1.5cqw #c9302c;animation:pxp 1s steps(2) infinite}
+.px-btn b{font-weight:400}
+.px-btn:active{transform:translateY(1.4cqw);box-shadow:0 0 0 .8cqw #1d1470,0 0 0 1.5cqw #fff,0 .4cqw 0 1.5cqw #c9302c}
+@keyframes pxp{50%{transform:scale(1.04)}}
+.s-tap{color:#fff;font-size:2.6cqw;animation:blk 1s steps(2) infinite}
 @keyframes blk{50%{opacity:0}}
-.px-no{background:none;border:0;color:#9fb2ff;font:inherit;font-size:clamp(8px,2.5vw,10px);text-decoration:underline;cursor:pointer;padding:10px}
-@media (prefers-reduced-motion:reduce){.px-btn,.px-tap,.px-stars{animation:none}}
+.px-no{background:none;border:0;color:#b7c4ff;font:inherit;font-size:9px;text-decoration:underline;cursor:pointer;padding:6px 10px}
+@media (prefers-reduced-motion:reduce){.px-btn,.s-tap{animation:none}}
 </style>
 </head>
 <body class="lock">
@@ -553,13 +552,45 @@ main{overflow-x:clip}
   <div class="flash" aria-hidden="true"></div>
   <button id="skip" type="button">Skip</button>
   <div class="start" id="start">
-    <div class="px">
-      <div class="px-stars" aria-hidden="true"></div>
-      <div class="px-top">PLAYER 1</div>
-      <div class="px-title"><span class="a">LUKE'S</span><span class="b">BIRTHDAY</span><span class="c">PARTY</span></div>
-      <div class="px-sub">YOU'RE INVITED!</div>
-      <button class="px-btn" id="startBtn" type="button" aria-label="Start, with sound"><b>START</b></button>
-      <div class="px-tap">&#9650; PRESS START &#9650;</div>
+    <div class="arc">
+      <div class="cabwrap2">
+        <svg class="cabsvg" viewBox="0 0 400 700" preserveAspectRatio="none" aria-hidden="true">
+<defs>
+<linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b2fd0"/><stop offset="1" stop-color="#3a1b9a"/></linearGradient>
+<linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd21f"/><stop offset=".35" stop-color="#ff8a2a"/><stop offset=".7" stop-color="#ff4fa3"/><stop offset="1" stop-color="#8a3cf0"/></linearGradient>
+<linearGradient id="gp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a04dff"/><stop offset="1" stop-color="#5a24c4"/></linearGradient>
+<linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e8bff"/><stop offset="1" stop-color="#1a4fd8"/></linearGradient>
+<radialGradient id="gl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff4fa3" stop-opacity=".55"/><stop offset="1" stop-color="#ff4fa3" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="200" cy="360" rx="230" ry="330" fill="url(#gl)"/>
+<rect x="28" y="6" width="344" height="116" rx="8" fill="url(#gm)"/>
+<rect x="28" y="6" width="34" height="9" fill="#ffb02e"/><rect x="338" y="6" width="34" height="9" fill="#ffb02e"/>
+<rect x="46" y="118" width="308" height="22" fill="#2a1478"/>
+<g fill="#4a2ab8"><rect x="62" y="126" width="276" height="3"/><rect x="62" y="133" width="276" height="3"/></g>
+<path d="M58 140H342L392 560H8Z" fill="url(#gb)"/>
+<path d="M58 140H342L392 560H8Z" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="3"/>
+<rect x="46" y="186" width="308" height="302" rx="26" fill="#ffe55c"/>
+<rect x="54" y="194" width="292" height="286" rx="22" fill="#162a8a"/>
+<rect x="60" y="200" width="280" height="274" rx="18" fill="url(#gs)"/>
+<path d="M64 206Q200 196 336 206" stroke="#fff" stroke-opacity=".25" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M6 540H394L380 690H20Z" fill="url(#gp)"/>
+<path d="M6 540H394L400 566H0Z" fill="#ff7ac8"/>
+<path d="M20 690H380" stroke="#2a1478" stroke-width="6"/>
+<g><rect x="96" y="598" width="8" height="38" fill="#ddd"/><circle cx="100" cy="590" r="17" fill="#ff3d5a"/><circle cx="94" cy="583" r="5" fill="#fff" fill-opacity=".6"/><ellipse cx="100" cy="640" rx="22" ry="8" fill="#2a1478"/></g>
+<g><rect x="296" y="598" width="8" height="38" fill="#ddd"/><circle cx="300" cy="590" r="17" fill="#ff3d5a"/><circle cx="294" cy="583" r="5" fill="#fff" fill-opacity=".6"/><ellipse cx="300" cy="640" rx="22" ry="8" fill="#2a1478"/></g>
+<g stroke="#2a1478" stroke-width="3"><circle cx="150" cy="600" r="11" fill="#35d6ff"/><circle cx="178" cy="590" r="11" fill="#7dff6a"/><circle cx="206" cy="600" r="11" fill="#ffe14a"/><circle cx="164" cy="628" r="11" fill="#ff4fa3"/><circle cx="192" cy="618" r="11" fill="#ff8a2a"/><circle cx="230" cy="622" r="11" fill="#35d6ff"/></g>
+</svg>
+        <div class="mq"><span>LUKE'S ARCADE</span><i>★ ★ ★ ★ ★</i></div>
+        <div class="scr">
+          <div class="scr-in">
+            <div class="s-top"><span>1UP</span><span>HI-SCORE 000006</span></div>
+            <div class="s-title"><span class="a">LUKE'S</span><span class="b">BIRTHDAY</span><span class="c">PARTY</span></div>
+            <div class="s-sub">YOU'RE INVITED!</div>
+            <button class="px-btn" id="startBtn" type="button" aria-label="Start, with sound"><b>START</b></button>
+            <div class="s-tap">PUSH START BUTTON</div>
+          </div>
+        </div>
+      </div>
       <button class="px-no" id="startNo" type="button">start without sound</button>
     </div>
   </div>
