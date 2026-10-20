@@ -333,6 +333,9 @@ footer .fine{margin-top:6px;font-size:14px;opacity:.85}
   .btn.yes,.btn.no{white-space:nowrap}
   .card .map{white-space:nowrap;font-size:13px;letter-spacing:.04em;padding-left:12px;padding-right:12px}
 }
+.eyebrow{margin:6px 0 18px}
+.hello{margin:0 0 14px;font:400 clamp(26px,8vw,38px)/1.1 var(--display);color:var(--gold);text-shadow:0 3px 0 #8a2a00,0 0 24px #ff7a1a88;letter-spacing:.02em}
+body.ready .hello{animation:fadeUp .45s .05s both}
 html,body{overflow-x:clip}
 .ls-beam{display:none}
 .luke-stage::before{content:"";position:absolute;left:50%;top:52%;width:120%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(122,77,255,.38),rgba(255,46,136,.16) 45%,transparent 68%)}
@@ -447,10 +450,7 @@ main{overflow-x:clip}
 <main>
   <header class="hero">
     <p class="eyebrow">You're invited to the ultimate showdown</p>
-    <div class="top-wrap" id="topTap" role="img" aria-label="A spinning battle top. Tap it to make it spin faster.">
-      <svg viewBox="0 0 200 200"><use href="#battletop"/></svg>
-      <span class="hint">Tap to rev it up</span>
-    </div>
+    <p class="hello" id="hello" hidden></p>
     <h1>
       <span class="l1">Luke is turning</span>
       <span class="six">6!</span>
@@ -517,10 +517,6 @@ main{overflow-x:clip}
                   <div class="step" role="group" aria-labelledby="adultsLbl">
                     <button type="button" data-t="adults" data-d="-1" aria-label="Fewer adults">−</button><output id="adults">1</output><button type="button" data-t="adults" data-d="1" aria-label="More adults">+</button>
                   </div></div>
-              </div>
-              <div class="field">
-                <label for="note">Anything we should know? (optional)</label>
-                <textarea id="note" name="note" maxlength="200" placeholder="Food allergies, running late…"></textarea>
               </div>
             </div>
             <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -763,11 +759,23 @@ main{overflow-x:clip}
 
   /* ───────── tap the top ───────── */
   var topEl=$('#topTap'), revT;
-  topEl.addEventListener('click',function(e){
+  if(topEl) topEl.addEventListener('click',function(e){
     sfx.spin();topEl.classList.add('rev');clearTimeout(revT);
     revT=setTimeout(function(){topEl.classList.remove('rev')},1400);
     var r=topEl.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,36,7);
   });
+
+
+  /* ───────── personalised invite: ?to=Name ───────── */
+  (function(){
+    var to='';
+    try{to=(new URLSearchParams(location.search).get('to')||'')}catch(e){}
+    to=to.replace(/[^\p{L}\p{M}\s'’.&,-]/gu,'').replace(/\s+/g,' ').trim().slice(0,40);
+    if(!to) return;
+    var h=$('#hello'); if(h){h.textContent='Hey '+to+'!';h.hidden=false}
+    var inp=$('#name'); if(inp&&!inp.value) inp.value=to;
+    document.title=to+", you're invited to Luke's 6th Birthday Battle!";
+  })();
 
   /* ───────── scroll reveal ───────── */
   if('IntersectionObserver' in window){
@@ -812,7 +820,7 @@ main{overflow-x:clip}
     if(attending && counts.kids+counts.adults<1){err.textContent='Add at least one guest.';sfx.err();return}
     err.textContent='';send.disabled=true;var old=send.textContent;send.textContent='Sending…';sfx.coin();
     fetch('/api/rsvp',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
-      name:name,attending:attending,kids:attending?counts.kids:0,adults:attending?counts.adults:0,note:$('#note').value.trim(),website:$('#website').value
+      name:name,attending:attending,kids:attending?counts.kids:0,adults:attending?counts.adults:0,note:'',website:$('#website').value
     })}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok) throw new Error(j.error||'fail');return j})})
     .then(function(){
       formArea.hidden=true;thanks.hidden=false;
