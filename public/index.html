@@ -242,6 +242,12 @@ body.ready .cta{animation:fadeUp .5s .85s both}
   background:#ffffff10;border:1.5px solid var(--line)}
 .card .ico svg{width:26px;height:26px;stroke:var(--cyan);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .card:nth-child(2) .ico svg{stroke:var(--gold)} .card:nth-child(3) .ico svg{stroke:var(--pink)}
+.card:nth-child(4)::before{background:linear-gradient(180deg,#46e08a,var(--cyan))}
+.card:nth-child(4) .ico svg{stroke:#46e08a}
+.pk{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.pk li{position:relative;padding-left:24px;color:var(--text);font-size:17px;line-height:1.3}
+.pk li::before{content:"";position:absolute;left:2px;top:.42em;width:7px;height:12px;border:solid #46e08a;border-width:0 2.5px 2.5px 0;transform:rotate(40deg) translate(-1px,-3px)}
+.pkfine{margin:10px 0 0;color:var(--muted);opacity:.75;font-size:12px;line-height:1.35}
 .label{font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .big{font-family:var(--display);font-size:26px;line-height:1.1;margin-top:3px;font-weight:400}
 .sub{color:var(--muted);font-size:18px;margin-top:2px}
@@ -490,6 +496,17 @@ main{overflow-x:clip}
       <img class="me-logo" src="main-event-logo.svg" width="156" height="46" alt="Main Event">
       <div class="sub">San Antonio West<br>8514 TX-151, San Antonio, TX 78245</div>
       <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Main+Event+San+Antonio+West+8514+TX-151+San+Antonio+TX+78245">Get directions →</a>
+    </div>
+    <div class="card reveal pkg">
+      <div class="ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="11" rx="5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".8"/><circle cx="18" cy="13.5" r=".8"/></svg></div>
+      <div class="label">Included for the birthday guest</div>
+      <div class="big">The Ultimate Gamer</div>
+      <ul class="pk">
+        <li>3 hours of unlimited video games*</li>
+        <li>2 VR experiences</li>
+        <li>1 game of laser tag**</li>
+      </ul>
+      <p class="pkfine">*Does not collect points for cash prizes. **Child must be taller than 42″.</p>
     </div>
   </section>
 
