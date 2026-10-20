@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Luke's 6th Birthday Party — You're Invited!</title>
-<meta name="description" content="Luke is turning 6! Join the party at Main Event on Sunday, November 1 at 11:30 AM. RSVP by October 25.">
+<meta name="description" content="Luke is turning 6! Join the party at Main Event on Sunday, November 1 at 11:30 AM. RSVP by October 28.">
 <meta property="og:title" content="Luke's 6th Birthday Party — You're Invited!">
 <meta property="og:description" content="Sunday, November 1 · 11:30 AM · Main Event San Antonio West. Tap to RSVP!">
 <meta property="og:type" content="website">
@@ -439,6 +439,33 @@ main{overflow-x:clip}
 @keyframes hp{50%{transform:scale(1.04)}}
 .hno{background:none;border:0;color:#fff;font:700 14px/1 'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px 12px;text-shadow:0 1px 4px #1d1470}
 @media (max-width:380px){.hbtn{font-size:22px;height:52px}.start.s3d .hud{padding-bottom:calc(70px + env(safe-area-inset-bottom))}}
+
+/* simple pixel-arcade start screen */
+.start{background:#14063a!important}
+.start::after{display:none}
+.px{position:relative;z-index:2;width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3.4vh,28px);text-align:center;font-family:'Press Start 2P',monospace;padding:20px 12px;
+  image-rendering:pixelated}
+.px::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 2px,transparent 2px 4px),
+  linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/16px 16px}
+.px-stars{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle,#fff 0 1.5px,transparent 2px) 0 0/90px 90px,radial-gradient(circle,#ffe14a 0 1.5px,transparent 2px) 30px 45px/110px 110px,radial-gradient(circle,#35d6ff 0 1.5px,transparent 2px) 60px 20px/130px 130px;animation:tw 1.6s steps(2) infinite}
+@keyframes tw{50%{opacity:.4}}
+.px-top{color:#35d6ff;font-size:clamp(10px,3vw,13px);letter-spacing:.1em}
+.px-title{display:flex;flex-direction:column;gap:12px;line-height:1}
+.px-title span{display:block;text-shadow:4px 4px 0 #1d1470,-2px -2px 0 #1d1470,2px -2px 0 #1d1470,-2px 2px 0 #1d1470}
+.px-title .a{color:#ffe14a;font-size:clamp(34px,13vw,58px)}
+.px-title .b{color:#fff;font-size:clamp(24px,9vw,40px)}
+.px-title .c{color:#ff4fa3;font-size:clamp(44px,17vw,76px)}
+.px-sub{color:#7dff6a;font-size:clamp(11px,3.6vw,16px);line-height:1.5;text-shadow:3px 3px 0 #1d1470}
+.px-btn{margin-top:6px;width:min(82vw,330px);padding:clamp(20px,4.4vh,30px) 10px;border:0;cursor:pointer;background:#ffe14a;color:#1d1470;font:inherit;font-size:clamp(30px,10vw,44px);letter-spacing:.06em;
+  box-shadow:0 0 0 5px #1d1470,0 0 0 9px #fff,0 12px 0 9px #c9302c;clip-path:none;animation:pxp 1s steps(2) infinite}
+.px-btn b{font-weight:400;text-shadow:3px 3px 0 #fff8}
+.px-btn:active{transform:translateY(8px);box-shadow:0 0 0 5px #1d1470,0 0 0 9px #fff,0 4px 0 9px #c9302c}
+@keyframes pxp{50%{transform:scale(1.05)}}
+.px-tap{color:#fff;font-size:clamp(9px,2.8vw,12px);animation:blk 1s steps(2) infinite;margin-top:10px}
+@keyframes blk{50%{opacity:0}}
+.px-no{background:none;border:0;color:#9fb2ff;font:inherit;font-size:clamp(8px,2.5vw,10px);text-decoration:underline;cursor:pointer;padding:10px}
+@media (prefers-reduced-motion:reduce){.px-btn,.px-tap,.px-stars{animation:none}}
 </style>
 </head>
 <body class="lock">
@@ -526,34 +553,14 @@ main{overflow-x:clip}
   <div class="flash" aria-hidden="true"></div>
   <button id="skip" type="button">Skip</button>
   <div class="start" id="start">
-    <div class="hud" id="hud">
-      <div class="hud-top"><span>🎈 LUKE TURNS 6! 🎈</span></div>
-      <div class="hud-bot">
-        <button class="hbtn" id="hudBtn" type="button" aria-label="Start, with sound"><span>START</span><small>🔊 SOUND ON</small></button>
-        <button class="hno" id="hudNo" type="button">start without sound</button>
-      </div>
-    </div>
-    <div class="cabwrap">
-    <div class="cab">
-      <div class="marq"><span>LUKE'S ARCADE</span></div>
-      <div class="bez"><div class="crt">
-        <div class="p1">PLAYER 1</div>
-        <div class="t1">LUKE'S<br>BIRTHDAY<br>PARTY</div>
-        <div class="t2">YOU'RE INVITED!</div>
-        <div class="ins">PRESS START</div>
-      </div></div>
-      <div class="pan">
-        <div class="joy" aria-hidden="true"><i class="gate"></i><i class="shaft"></i><i class="ball"></i></div>
-        <div class="btns c" aria-hidden="true"><i class="ab"></i><i class="ab"></i><i class="ab"></i></div>
-        <button class="startbtn" id="startBtn" type="button" aria-label="Press start, with sound"><b>START</b><small>🔊</small></button>
-        <div class="btns p" aria-hidden="true"><i class="ab"></i><i class="ab"></i><i class="ab"></i></div>
-        <div class="joy j2" aria-hidden="true"><i class="gate"></i><i class="shaft"></i><i class="ball"></i></div>
-      </div>
-      <div class="base">
-        <div class="coin" aria-hidden="true"><i></i><span>25¢</span><i></i></div>
-        <button class="startno" id="startNo" type="button">start without sound</button>
-      </div>
-    </div>
+    <div class="px">
+      <div class="px-stars" aria-hidden="true"></div>
+      <div class="px-top">PLAYER 1</div>
+      <div class="px-title"><span class="a">LUKE'S</span><span class="b">BIRTHDAY</span><span class="c">PARTY</span></div>
+      <div class="px-sub">YOU'RE INVITED!</div>
+      <button class="px-btn" id="startBtn" type="button" aria-label="Start, with sound"><b>START</b></button>
+      <div class="px-tap">&#9650; PRESS START &#9650;</div>
+      <button class="px-no" id="startNo" type="button">start without sound</button>
     </div>
   </div>
 </div>
@@ -604,7 +611,7 @@ main{overflow-x:clip}
   <section id="rsvp" class="reveal" aria-labelledby="rsvpTitle">
     <div class="rsvp-box">
       <h2 id="rsvpTitle">Are you <b>in?</b></h2>
-      <p class="deadline">Please let us know by <strong>October 25</strong></p>
+      <p class="deadline">Please let us know by <strong>October 28</strong></p>
 
       <div id="formArea">
         <div class="choices">
@@ -991,6 +998,5 @@ main{overflow-x:clip}
   })();
 })();
 </script>
-<script src="arcade3d.js" defer></script>
 </body>
 </html>
