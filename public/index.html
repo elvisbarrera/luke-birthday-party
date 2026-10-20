@@ -267,6 +267,7 @@ body.ready h1 .l3{animation:slamIn .4s .4s both cubic-bezier(.2,1.5,.4,1)}
 body.ready .rip-badge{animation:badgeIn .45s .6s both cubic-bezier(.2,1.8,.4,1),badgePulse 2.2s 1.3s ease-in-out infinite}
 body.ready .tagline{animation:fadeUp .5s .75s both}
 body.ready .incl{animation:fadeUp .5s .85s both}
+.incl-big{margin:0 0 16px;padding:12px 14px;text-align:center;font-size:clamp(14px,4vw,16px);line-height:1.4;color:#fff;background:rgba(255,225,74,.12);border:1.5px solid rgba(255,225,74,.55);border-radius:14px}.incl-big b{color:#ffe14a}
 .incl-note{margin:14px 0 0;text-align:center;color:var(--muted);opacity:.8;font-size:13px;letter-spacing:.03em}
 .incl{margin:10px auto 0;max-width:30ch;color:var(--muted);opacity:.75;font-size:13px;line-height:1.35;letter-spacing:.02em}
 body.ready .cta{animation:fadeUp .5s .85s both}
@@ -624,28 +625,16 @@ main{overflow-x:clip}
 
         <form id="rsvpForm" hidden novalidate>
           <div id="panel">
+            <p class="incl-big">Only <b>one child</b> per invitation is included in the Main Event package. Additional children are not included.</p>
             <div class="field">
-              <label for="name">Your name</label>
-              <input type="text" id="name" name="name" autocomplete="name" maxlength="60" placeholder="First and last name">
-            </div>
-            <div id="guests">
-              <div class="pair field">
-                <div><span class="lbl" id="kidsLbl">Kids</span>
-                  <div class="step" role="group" aria-labelledby="kidsLbl">
-                    <button type="button" data-t="kids" data-d="-1" aria-label="Fewer kids">−</button><output id="kids">1</output><button type="button" data-t="kids" data-d="1" aria-label="More kids">+</button>
-                  </div></div>
-                <div><span class="lbl" id="adultsLbl">Adults</span>
-                  <div class="step" role="group" aria-labelledby="adultsLbl">
-                    <button type="button" data-t="adults" data-d="-1" aria-label="Fewer adults">−</button><output id="adults">1</output><button type="button" data-t="adults" data-d="1" aria-label="More adults">+</button>
-                  </div></div>
-              </div>
+              <label for="name">Child's name</label>
+              <input type="text" id="name" name="name" autocomplete="off" maxlength="60" placeholder="First and last name">
             </div>
             <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></label></div>
             <p class="err" id="err" role="alert" aria-live="assertive"></p>
             <button type="submit" class="btn send" id="sendBtn">Send my RSVP 🚀</button>
           </div>
         </form>
-        <p class="incl-note">Each invitation includes one child.</p>
       </div>
 
       <div id="thanks" class="done-box" hidden aria-live="polite"></div>
@@ -913,14 +902,14 @@ main{overflow-x:clip}
   } else {document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')})}
 
   /* ───────── RSVP ───────── */
-  var yes=$('#yesBtn'), no=$('#noBtn'), form=$('#rsvpForm'), guests=$('#guests'), err=$('#err'), send=$('#sendBtn'),
+  var yes=$('#yesBtn'), no=$('#noBtn'), form=$('#rsvpForm'), err=$('#err'), send=$('#sendBtn'),
       formArea=$('#formArea'), thanks=$('#thanks'), attending=null, counts={kids:1,adults:1};
   var LIMITS={kids:[0,10],adults:[0,10]};
 
   function choose(v){
     attending=v;
     yes.setAttribute('aria-pressed',String(v===true));no.setAttribute('aria-pressed',String(v===false));
-    form.hidden=false;guests.hidden=!v;err.textContent='';
+    form.hidden=false;var ib=document.querySelector('.incl-big');if(ib)ib.hidden=!v;err.textContent='';
     send.textContent=v?'Send my RSVP 🚀':'Send my answer';
     setTimeout(function(){form.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})},60);
     if(v){var r=yes.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,30,6);sfx.up()}else{sfx.click()}
@@ -945,16 +934,15 @@ main{overflow-x:clip}
     e.preventDefault();
     var name=$('#name').value.trim();
     if(attending===null){err.textContent='Tap "I’m in!" or "Can’t make it" first.';sfx.err();return}
-    if(!name){err.textContent='Please add your name.';sfx.err();$('#name').focus();return}
-    if(attending && counts.kids+counts.adults<1){err.textContent='Add at least one guest.';sfx.err();return}
+    if(!name){err.textContent='Please add the child’s name.';sfx.err();$('#name').focus();return}
     err.textContent='';send.disabled=true;var old=send.textContent;send.textContent='Sending…';sfx.coin();
     fetch('/api/rsvp',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
-      name:name,attending:attending,kids:attending?counts.kids:0,adults:attending?counts.adults:0,note:'',website:$('#website').value
+      name:name,attending:attending,kids:attending?1:0,adults:0,note:'',website:$('#website').value
     })}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok) throw new Error(j.error||'fail');return j})})
     .then(function(){
       formArea.hidden=true;thanks.hidden=false;
       if(attending){sfx.yes();
-        thanks.innerHTML='<span class="emoji">🌀</span><h3>You’re in!</h3><p><strong>'+esc(name)+'</strong>, we’ve got you down for <strong>'+counts.kids+' kid'+(counts.kids===1?'':'s')+'</strong> and <strong>'+counts.adults+' adult'+(counts.adults===1?'':'s')+'</strong>.<br>See you Sunday, Nov 1 at 11:30 AM!</p><button class="linkbtn" type="button" id="again">Change my answer</button>';
+        thanks.innerHTML='<span class="emoji">🌀</span><h3>You’re in!</h3><p><strong>'+esc(name)+'</strong> is on the list.<br>See you Sunday, Nov 1 at 11:30 AM!</p><button class="linkbtn" type="button" id="again">Change my answer</button>';
         var r=thanks.getBoundingClientRect();burst(innerWidth/2,Math.max(120,r.top+60),90,9);setTimeout(function(){burst(innerWidth*.3,r.top+40,40,6);burst(innerWidth*.7,r.top+40,40,6)},300);
       } else {
         sfx.no();

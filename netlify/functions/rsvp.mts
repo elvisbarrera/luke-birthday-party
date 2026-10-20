@@ -48,14 +48,14 @@ export default async (req: Request, _context: Context) => {
       const t = totals(await getAll());
       const origin = new URL(req.url).origin;
       const key = Netlify.env.get("GUESTS_KEY");
-      const people = `${kids} kid${kids === 1 ? "" : "s"} + ${adults} adult${adults === 1 ? "" : "s"}`;
+      const people = adults ? `${kids} kid${kids === 1 ? "" : "s"} + ${adults} adult${adults === 1 ? "" : "s"}` : `${kids} kid${kids === 1 ? "" : "s"}`;
       const verb = existing ? "updated: " : "";
       const title = attending ? `🌀 ${name} is IN! (${people})` : `${name} can't make it`;
       const lines = [
         attending ? `${verb}${name} is coming with ${people}.` : `${verb}${name} can't make it.`,
         note ? `Note: ${note}` : "",
         "",
-        `Total so far: ${t.people} people (${t.kids} kids + ${t.adults} adults) · ${t.yes} yes, ${t.no} no`,
+        t.adults ? `Total so far: ${t.people} people (${t.kids} kids + ${t.adults} adults) · ${t.yes} yes, ${t.no} no` : `Total so far: ${t.kids} kids · ${t.yes} yes, ${t.no} no`,
       ].filter((l, i, a) => l !== "" || (i > 0 && i < a.length - 1));
       const res = await fetch("https://ntfy.sh/", {
         method: "POST",
