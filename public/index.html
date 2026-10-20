@@ -658,17 +658,7 @@ main{overflow-x:clip}
   var AC=null, master=null, muted=false, muteBtn=$('#mute');
   try{muted=localStorage.getItem('lukeMuted')==='1'}catch(e){}
   function paintMute(){muteBtn.textContent=muted?'🔇':'🔊';muteBtn.setAttribute('aria-pressed',String(muted));muteBtn.setAttribute('aria-label',muted?'Turn sound on':'Turn sound off')}
-  /* background music: official YouTube embed, starts on START tap */
   var yt=null,ytReady=false,ytWant=false;
-  (function(){
-    var d=document.createElement('div');d.id='ytm';d.style.cssText='position:fixed;left:-9999px;top:0;width:200px;height:200px;pointer-events:none';
-    d.innerHTML='<div id="ytp"></div>';document.body.appendChild(d);
-    window.onYouTubeIframeAPIReady=function(){try{yt=new YT.Player('ytp',{videoId:'bcmTHIqefMk',playerVars:{playsinline:1,controls:0,disablekb:1,fs:0,rel:0,start:572},
-      events:{onReady:function(){ytReady=true;if(ytWant)musicOn()}}})}catch(e){}};
-    var sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';sc.async=true;document.head.appendChild(sc);
-  })();
-  function musicOn(){ytWant=true;if(!ytReady||!yt)return;try{yt.setVolume(55);yt.seekTo(572,true);yt.playVideo()}catch(e){}}
-  function musicOff(){ytWant=false;if(!ytReady||!yt)return;var v=55,iv=setInterval(function(){v-=5;try{yt.setVolume(Math.max(v,0))}catch(e){}if(v<=0){clearInterval(iv);try{yt.pauseVideo()}catch(e){}}},120)}
   function setMuted(m){muted=m;if(m){if(yt&&ytReady)try{yt.pauseVideo()}catch(e){}}else if(ytWant&&yt&&ytReady)try{yt.playVideo()}catch(e){};try{localStorage.setItem('lukeMuted',m?'1':'0')}catch(e){}paintMute()}
   paintMute();
   function audioInit(){
@@ -878,7 +868,7 @@ main{overflow-x:clip}
     later(end,2800);
   }
   function begin(withSound){
-    if(withSound){setMuted(false);audioInit();sfx.coin();musicOn()}else{setMuted(true)}
+    if(withSound){setMuted(false);audioInit();sfx.coin()}else{setMuted(true)}
     startEl.classList.add('gone');
     setTimeout(function(){startEl.style.display='none'},400);
     if(reduce){end()}else{setTimeout(runIntro,withSound?450:150)}
