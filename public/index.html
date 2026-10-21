@@ -884,14 +884,24 @@ main{overflow-x:clip}
   });
 
 
+  /* two names joined by "y" / "and" / "&" count as two kids */
+  function kidCount(n){var p=String(n||'').split(/\s+(?:y|and|&)\s+/i).filter(function(x){return x.trim()});return Math.max(1,Math.min(4,p.length))}
+  (function(){
+    var inp=$('#name'),nt=document.querySelector('.incl-big');if(!inp||!nt)return;
+    var W=['','one','two','three','four'];
+    function upd(){var k=kidCount(inp.value);nt.innerHTML=k>1?'This invitation includes <b>'+W[k]+' children</b>.':'Only <b>one child</b> per invitation is included.'}
+    inp.addEventListener('input',upd);
+  })();
+
   /* ───────── personalised invite: ?to=Name ───────── */
   (function(){
     var to='';
     try{to=(new URLSearchParams(location.search).get('to')||'')}catch(e){}
     to=to.replace(/[^\p{L}\p{M}\s'’.&,-]/gu,'').replace(/\s+/g,' ').trim().slice(0,40);
     if(!to) return;
-    var h=$('#hello'); if(h){h.textContent='Hey '+to+'!';h.hidden=false}
+    var h=$('#hello'); if(h){h.textContent='Hey '+to.replace(/\s+(?:y|and)\s+/gi,' & ')+'!';h.hidden=false}
     var inp=$('#name'); if(inp&&!inp.value) inp.value=to;
+    if(inp)inp.dispatchEvent(new Event('input'));
     document.title=to+", you're invited to Luke's 6th Birthday Party!";
   })();
 
@@ -937,7 +947,7 @@ main{overflow-x:clip}
     if(!name){err.textContent='Please add the child’s name.';sfx.err();$('#name').focus();return}
     err.textContent='';send.disabled=true;var old=send.textContent;send.textContent='Sending…';sfx.coin();
     fetch('/api/rsvp',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
-      name:name,attending:attending,kids:attending?1:0,adults:0,note:'',website:$('#website').value
+      name:name,attending:attending,kids:attending?kidCount(name):0,adults:0,note:'',website:$('#website').value
     })}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok) throw new Error(j.error||'fail');return j})})
     .then(function(){
       formArea.hidden=true;thanks.hidden=false;
