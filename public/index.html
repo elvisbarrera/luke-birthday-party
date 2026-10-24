@@ -267,6 +267,7 @@ body.ready h1 .l3{animation:slamIn .4s .4s both cubic-bezier(.2,1.5,.4,1)}
 body.ready .rip-badge{animation:badgeIn .45s .6s both cubic-bezier(.2,1.8,.4,1),badgePulse 2.2s 1.3s ease-in-out infinite}
 body.ready .tagline{animation:fadeUp .5s .75s both}
 body.ready .incl{animation:fadeUp .5s .85s both}
+.incl-big.nonote{display:none!important}
 .incl-big{margin:0 0 16px;padding:12px 14px;text-align:center;font-size:clamp(14px,4vw,16px);line-height:1.4;color:#fff;background:rgba(255,225,74,.12);border:1.5px solid rgba(255,225,74,.55);border-radius:14px}.incl-big b{color:#ffe14a}
 .incl-note{margin:14px 0 0;text-align:center;color:var(--muted);opacity:.8;font-size:13px;letter-spacing:.03em}
 .incl{margin:10px auto 0;max-width:30ch;color:var(--muted);opacity:.75;font-size:13px;line-height:1.35;letter-spacing:.02em}
@@ -1062,6 +1063,7 @@ main{overflow-x:clip}
     var inp=$('#name'),nt=document.querySelector('.incl-big');if(!inp||!nt)return;
     var W=['','one','two','three','four'];
     function upd(){var k=kidCount(inp.value);
+      nt.classList.toggle('nonote',!!FIX||(!ADULT&&k>1));
       if(FIX){nt.innerHTML='This invitation includes <b>'+W[FIX]+' children</b>.';return}
       if(ADULT){nt.innerHTML='This invitation includes <b>'+W[k]+' guest'+(k>1?'s':'')+'</b>.';return}
       var lb3=document.querySelector('label[for="name"]');if(lb3)lb3.textContent=k>1?"Children's names":"Child's name";
