@@ -48,7 +48,7 @@ export default async (req: Request, _context: Context) => {
       const t = totals(await getAll());
       const origin = new URL(req.url).origin;
       const key = Netlify.env.get("GUESTS_KEY");
-      const people = adults ? `${kids} kid${kids === 1 ? "" : "s"} + ${adults} adult${adults === 1 ? "" : "s"}` : `${kids} kid${kids === 1 ? "" : "s"}`;
+      const people = [kids ? `${kids} kid${kids === 1 ? "" : "s"}` : "", adults ? `${adults} adult${adults === 1 ? "" : "s"}` : ""].filter(Boolean).join(" + ");
       const verb = existing ? "updated: " : "";
       const title = attending ? `🌀 ${name} is IN! (${people})` : `${name} can't make it`;
       const lines = [

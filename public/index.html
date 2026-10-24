@@ -1055,12 +1055,16 @@ main{overflow-x:clip}
   });
 
 
-  /* two names joined by "y" / "and" / "&" count as two kids */
+  /* two names joined by "y" / "and" / "&" count as two guests; &a=1 in the link = adult guests */
+  var ADULT=false;try{ADULT=new URLSearchParams(location.search).get('a')==='1'}catch(e){}
   function kidCount(n){var p=String(n||'').split(/\s+(?:y|and|&)\s+/i).filter(function(x){return x.trim()});return Math.max(1,Math.min(4,p.length))}
   (function(){
     var inp=$('#name'),nt=document.querySelector('.incl-big');if(!inp||!nt)return;
     var W=['','one','two','three','four'];
-    function upd(){var k=kidCount(inp.value);nt.innerHTML=k>1?'This invitation includes <b>'+W[k]+' children</b>.':'Only <b>one child</b> per invitation is included.'}
+    function upd(){var k=kidCount(inp.value);
+      if(ADULT){nt.innerHTML='This invitation includes <b>'+W[k]+' guest'+(k>1?'s':'')+'</b>.';return}
+      nt.innerHTML=k>1?'This invitation includes <b>'+W[k]+' children</b>.':'Only <b>one child</b> per invitation is included.'}
+    if(ADULT){var lb=document.querySelector('label[for="name"]');if(lb)lb.textContent="Guests' names";upd()}
     inp.addEventListener('input',upd);
   })();
 
@@ -1115,10 +1119,10 @@ main{overflow-x:clip}
     e.preventDefault();
     var name=$('#name').value.trim();
     if(attending===null){err.textContent='Tap "I’m in!" or "Can’t make it" first.';sfx.err();return}
-    if(!name){err.textContent='Please add the child’s name.';sfx.err();$('#name').focus();return}
+    if(!name){err.textContent=ADULT?'Please add your names.':'Please add the child’s name.';sfx.err();$('#name').focus();return}
     err.textContent='';send.disabled=true;var old=send.textContent;send.textContent='Sending…';sfx.coin();
     fetch('/api/rsvp',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
-      name:name,attending:attending,kids:attending?kidCount(name):0,adults:0,note:'',website:$('#website').value
+      name:name,attending:attending,kids:attending&&!ADULT?kidCount(name):0,adults:attending&&ADULT?kidCount(name):0,note:'',website:$('#website').value
     })}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok) throw new Error(j.error||'fail');return j})})
     .then(function(){
       formArea.hidden=true;thanks.hidden=false;
